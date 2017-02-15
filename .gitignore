@@ -2,5 +2,6 @@
 *.jar
 *.mat
 *.opts
+.DS_Store
 
 archive
