@@ -1,0 +1,21 @@
+#PBS -S /bin/bash
+#PBS -l pmem=4gb
+#PBS -l ncpus=1
+#PBS -V
+#PBS -e node001:/home/KTDynamics/KTdynDB_V2/pbslogs/$PBS_JOBNAME.err
+#PBS -o node001:/home/KTDynamics/KTdynDB_V2/pbslogs/$PBS_JOBNAME.out
+
+# Random delay to avoid overloading resources.
+sleep $[ ( $RANDOM % 10 )  + 1 ]s
+
+# Parse task list into an array.
+IFS='.' read -ra TASKIDARRAY <<< "$TASKIDLIST"
+TASKID=${TASKIDARRAY[$PBS_ARRAYID]}
+
+case $HOSTNAME in
+    node00[1-2]*) cd /home/KTDynamics/KTdynDB_V2/dbcode;;
+    node00[3-5]*) cd /KT/KTDynamics/KTdynDB_V2/dbcode;;
+esac
+echo "Running DB task $TASKID on " `hostname`
+matlab -nodesktop -nosplash -singleCompThread -r "dbExecuteTask($TASKID,'mysql');"
+echo "Completed DB task $TASKID on " `hostname`
