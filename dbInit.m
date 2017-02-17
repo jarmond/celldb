@@ -1,22 +1,22 @@
 function dbInit(db,usemex)
 % Initialize db.
 
-fprintf('Initializing Kinetochore Dynamics Database...\n');
+fprintf('Initializing Cell Database...\n');
 
 if ~exist('./db.marker','file')
-  error('Must be in dbcode directory to use database');
+  error('Must be in CellDB directory to use database');
 end
 
 global dbsystem dbdatapath dbrunpath dbusemex;
 
-dbmcmcpath=fullfile(pwd,'../mcmc');
+dbcodepath=fullfile(pwd,'../code');
 dbdatapath=fullfile(pwd,'../data');
 dbrunpath=fullfile(pwd,'../MCMCruns');
 
-mcmcsubs = {'mcmcroutines','utilities','analysis_EventsProfiles'};
-addpath(dbmcmcpath);
+codesubs = {};
+addpath(dbcodepath);
 for i=1:length(mcmcsubs)
-  addpath(fullfile(dbmcmcpath, mcmcsubs{i}));
+  addpath(fullfile(dbcodepath, codesubs{i}));
 end
 
 if nargin>0
@@ -43,5 +43,5 @@ end
 
 load(tmpfile);
 delete(tmpfile);
-fprintf('Using db system: %s\n',dbsystem);
+fprintf('Using DB backend: %s\n',dbsystem);
 fprintf('Ready.\n');
