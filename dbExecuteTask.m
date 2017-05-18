@@ -129,7 +129,7 @@ try
         runCount = dbIncrementRunCount(task_id);
       end
       % Check convergence regardless so we know whether to ReRun.
-      convergence = dbUpdateConvergence(task_id,run_id,trajData.cellIdx,trajData.sisterList.idx);
+      convergence = dbUpdateConvergence(task_id,run_id,trajData.cellIdx,cell2mat({trajData.sisterList.idx}));
 
       % Continue iterations if necessary.
       typ={2,1};
