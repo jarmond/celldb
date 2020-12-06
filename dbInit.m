@@ -13,10 +13,12 @@ dbcodepath=fullfile(pwd,'../code');
 dbdatapath=fullfile(pwd,'../data');
 dbrunpath=fullfile(pwd,'../MCMCruns');
 
-codesubs = {};
+codesubs = {'mcmcroutines','utilities','analysis_EventsProfiles'};
 addpath(dbcodepath);
-for i=1:length(mcmcsubs)
-  addpath(fullfile(dbcodepath, codesubs{i}));
+for i=1:length(codesubs)
+  if exist(codesubs{i})
+    addpath(fullfile(dbcodepath, codesubs{i}));
+  end
 end
 
 if nargin>0

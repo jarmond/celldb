@@ -234,7 +234,7 @@ function runs=getRuns(allUsers,runid,limit)
     sql = [sql ' LIMIT ' num2str(limit)];
   end
   sql = [sql ';'];
-  results = fetch(conn.conn,sql);
+  results = table2cell(fetch(conn.conn,sql));
   runs = cell2mat(results);
 end
 
@@ -280,7 +280,7 @@ function [tasks,types]=getTasks(runid,status,node,pbs,limit)
     sql = [sql ' LIMIT ' num2str(limit)];
   end
   sql = [sql ';'];
-  results = fetch(conn.conn,sql);
+  results = table2cell(fetch(conn.conn,sql));
 
   tasks = cell2mat(results(:,1));
   if nargout>1

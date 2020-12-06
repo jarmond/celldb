@@ -30,6 +30,7 @@ if ~isempty(opts.id)
                  'JOIN cellline ON cellline_id=cellline.id WHERE experiment.id = %d;'], ...
                 opts.id);
   results = fetch(conn.conn, sql);
+  results = table2cell(results);
   if isempty(results)
     fprintf('No experiment with ID %d\n',opts.id);
   else
@@ -63,6 +64,7 @@ if ~isempty(opts.user)
 end
 sql = [sql ' ORDER BY experiment.id;'];
 results = fetch(conn.conn, sql);
+results = table2cell(results);
 
 global dbdatapath;
 

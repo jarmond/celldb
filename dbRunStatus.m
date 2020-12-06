@@ -7,7 +7,7 @@ conn = dbOpen();
 
 sql = sprintf(['SELECT status,count(*) FROM task WHERE run_id=%d GROUP BY ' ...
                'status;'],runId);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 if isempty(results)
   error('No such run id %d or no tasks',run_id);
 end
@@ -53,7 +53,7 @@ if isFinished
   sql = sprintf(['SELECT finish,numchains FROM task JOIN run ON '...
                  'task.run_id=run.id WHERE run_id=%d AND type<=2 ORDER BY finish ' ...
                  'DESC LIMIT 1;'],runId);
-  results = fetch(conn.conn,sql);
+  results = table2cell(fetch(conn.conn,sql));
   finish = datenum(results{1,1});
   numchains = results{1,2};
 

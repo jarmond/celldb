@@ -126,7 +126,7 @@ conn = dbOpen();
 
 % If run name exists, add the timestamp to make unique.
 sql = ['SELECT 1 FROM run WHERE name = ''' opts.name ''';'];
-results = fetch(conn.conn, sql);
+results = table2cell(fetch(conn.conn, sql));
 if ~isempty(results)
   error('Run name not unique.');
   %sql = 'SELECT unix_timestamp();';
@@ -156,9 +156,9 @@ fprintf('Run created: %d\n',run_id);
 
   switch dbsystem
     case 'sqlite'
-      result = fetch(conn.conn, 'SELECT last_insert_rowid();');
+      result = table2cell(fetch(conn.conn, 'SELECT last_insert_rowid();'));
     case 'mysql'
-      result = fetch(conn.conn, 'SELECT last_insert_id();');
+      result = table2cell(fetch(conn.conn, 'SELECT last_insert_id();'));
   end
   id = result{1};
 

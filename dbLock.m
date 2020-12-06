@@ -15,7 +15,7 @@ userId = dbGetId('user','initials',user);
 conn = dbOpen();
 
 sql = sprintf('SELECT name FROM run WHERE id=%d AND user_id=%d;',runId,userId);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 if isempty(results)
   error('You don''t own run %d or it doesn''t exist',runId);
 end
@@ -40,4 +40,3 @@ fprintf([' ' runDir '\n']);
 if status~=0
   fprintf('chmod failed: %s\n',result);
 end
-

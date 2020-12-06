@@ -15,7 +15,8 @@ switch dbsystem
     else
       server = 'node001';
     end
-    conn = database(db,user,password,'Vendor','MySQL','Server',server);
+    %conn = database(db,user,password,'Vendor','MySQL','Server',server);
+    conn = database(db,user,password,'com.mysql.jdbc.Driver',['jdbc:mysql://localhost/' db]);
 
   case 'sqlite'
     conn = database('','','','org.sqlite.JDBC','jdbc:sqlite:/Users/jon/kt/db/kt.db');
@@ -27,4 +28,3 @@ end
 C = onCleanup(@() close(conn));
 connC.conn = conn;
 connC.C = C;
-

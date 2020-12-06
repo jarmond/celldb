@@ -48,6 +48,7 @@ if ~isempty(opts.run)
                  'JOIN cellline ON cellline_id=cellline.id WHERE run.id = %d;'], ...
                 opts.run);
   results = fetch(conn.conn, sql);
+  results = table2cell(results);
   if isempty(results)
     fprintf('No run with ID %d\n',opts.run);
   else
@@ -83,7 +84,7 @@ if opts.status ~= 'A'
   else
     op = 'ANY';
   end
-  clauses = [clauses sprintf([interpString('s') ' = %s(SELECT opts.status '...
+  clauses = [clauses sprintf([interpString('s') ' = %s(SELECT status '...
                      'FROM task WHERE run_id = run.id)'],opts.status,op)];
 end
 
@@ -100,6 +101,7 @@ end
 sql = [sql ' ORDER BY run.id;'];
 
 results = fetch(conn.conn, sql);
+results = table2cell(results);
 
 if isempty(results)
   fprintf('No runs\n');

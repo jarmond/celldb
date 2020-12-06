@@ -30,7 +30,7 @@ sql = sprintf(['SELECT model.name,run.name,file,numchains '...
        'JOIN model ON model_id = model.id '...
        'JOIN experiment ON experiment_id=experiment.id '...
        'WHERE run.id = %d'],runId);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 if isempty(results)
   error('No such run id %d',runId);
 end
@@ -82,4 +82,3 @@ for i=1:size(trajNum,1)
     mcmcdat(i,j).chain = j;
   end
 end
-

@@ -5,6 +5,7 @@ conn = dbOpen();
 
 sql = 'SELECT id,name,code,description FROM cellline;';
 results = fetch(conn.conn, sql);
+results = table2cell(results);
 
 if isempty(results)
   error('No cell lines');

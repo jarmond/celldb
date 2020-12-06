@@ -10,6 +10,7 @@ else
   sql = [sql ';'];
 end
 results = fetch(conn.conn, sql);
+results = table2cell(results);
 
 if nargin>0
   initials = results{1,3};

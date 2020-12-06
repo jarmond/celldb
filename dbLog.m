@@ -13,7 +13,7 @@ end
 conn = dbOpen();
 sql = sprintf('SELECT log FROM log WHERE task_id=%d;',taskId);
 
-results = fetch(conn.conn, sql);
+results = table2cell(fetch(conn.conn, sql));
 if isempty(results)
   fprintf('No task with ID %d\n',taskId);
   return

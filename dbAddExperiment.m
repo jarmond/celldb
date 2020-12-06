@@ -156,7 +156,6 @@ sql = [sql ');'];
 dbCheck(exec(conn.conn, sql));
 
 sql = sprintf(['SELECT id FROM experiment WHERE file=' interpString('s') ';'],file);
-results = fetch(conn.conn, sql);
+results = table2cell(fetch(conn.conn, sql));
 assert(~isempty(results));
 id = results{1,1};
-

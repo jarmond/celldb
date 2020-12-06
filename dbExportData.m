@@ -8,7 +8,7 @@ sql = sprintf(['SELECT model.name,experiment.file,run.name '...
        'JOIN model ON model_id = model.id '...
        'JOIN experiment ON experiment_id = experiment.id '...
        'WHERE run.id = %d'],run_id);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 if isempty(results)
   error('No such run id %d',run_id);
 end
@@ -28,4 +28,3 @@ load(exptPath);
 
 save(fullfile(runDir,'trajexpt.mat'),'trajData','ExptDat','runDir', ...
      'modelName');
-

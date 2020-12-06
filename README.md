@@ -40,7 +40,7 @@ Usage
   - Several optional arguments are possible, if not supplied they will be queried
 
 - Setup a set of MCMC runs with:
-  - dbSetupRuns('name','myrun1');
+  - dbSetupRun('name','myrun1');
   - All parameters are optional and will be queried if needed, except name.
   - Priors can be specified as a struct or a string, e.g.:
     - p.L = [10 0.5]; p.kappa = [0.5 1]; ...., or

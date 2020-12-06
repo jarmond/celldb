@@ -5,7 +5,7 @@ trajData = dbGetData(run_id);
 
 if isempty(subset)
   sql = sprintf('SELECT num_cells FROM experiment WHERE id = %d;',experiment_id);
-  results = fetch(conn,sql);
+  results = table2cell(fetch(conn,sql));
   numCells = results{1};
   range = 1:numCells;
 else

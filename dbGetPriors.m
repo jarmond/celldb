@@ -3,7 +3,7 @@ function priors=dbGetPriors(run_id)
 conn = dbOpen();
 
 sql = sprintf('SELECT priors FROM run WHERE id=%d;',run_id);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 row = results(1);
 priorStr = row{1};
 

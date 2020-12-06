@@ -13,7 +13,7 @@ conn = dbOpen();
 if ~isempty(conditional)
   % Check current status, and only update if as specified.
   sql = sprintf('SELECT status FROM task WHERE id=%d;',task_id);
-  results = fetch(conn.conn,sql);
+  results = table2cell(fetch(conn.conn,sql));
   if results{1} ~= conditional
     tf=false;
     return;
@@ -42,4 +42,3 @@ fmt = [fmt ' WHERE id=%d LIMIT 1;'];
 sql = sprintf(fmt,status,task_id);
 dbCheck(exec(conn.conn,sql));
 tf = true;
-

@@ -18,7 +18,7 @@ conn = dbOpen();
 sql = sprintf(['SELECT experiment.name,file FROM experiment JOIN user ON user_id=user.id '...
                'WHERE initials=' interpString('s') ' AND experiment.id=%d;'],user, ...
               expId);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 if isempty(results)
   error('You have no experiment with id %d',expId);
 end
@@ -28,7 +28,7 @@ trajPath = row{2};
 
 % Check if runs exist using this data.
 sql = sprintf('SELECT run.id FROM run WHERE experiment_id=%d;',expId);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 if ~isempty(results)
   disp(['Runs exist using this experiment: ' num2str(cell2mat(results(:)))]);
   disp('Delete these runs first.');
@@ -60,4 +60,3 @@ if dryrun
 else
   dbCheck(exec(conn.conn,sql));
 end
-

@@ -81,6 +81,8 @@ else
 end
 
 results = fetch(conn.conn, [sql ';']);
+results = table2cell(results);
+
 if isempty(results)
   fprintf('No tasks\n');
   return

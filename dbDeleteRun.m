@@ -17,7 +17,7 @@ conn = dbOpen();
 sql = sprintf(['SELECT run.name FROM run JOIN user ON user_id=user.id '...
                'WHERE initials=' interpString('s') ' AND run.id=%d;'],user, ...
               run_id);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 if isempty(results)
   error('You have no run with id %d',run_id);
 end
@@ -64,4 +64,3 @@ if dryrun
 else
   system(cmd);
 end
-

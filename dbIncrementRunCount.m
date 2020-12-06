@@ -8,6 +8,5 @@ sql = sprintf('UPDATE task SET runcount=runcount+%d WHERE id=%d LIMIT 1;',inc,ta
 dbCheck(exec(conn.conn,sql));
 
 sql = sprintf('SELECT runcount FROM task WHERE id=%d;',taskId);
-results = fetch(conn.conn,sql);
+results = table2cell(fetch(conn.conn,sql));
 runCount = results{1,1};
-

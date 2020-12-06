@@ -4,4 +4,5 @@ function tf=dbValidId(table,id)
 conn = dbOpen();
 sql = sprintf('SELECT 1 FROM %s WHERE id = %d',table,id);
 results = fetch(conn.conn,sql);
-tf = ~isempty(results);
+results = table2cell(results);
+tf = ~isempty(results{1,1});

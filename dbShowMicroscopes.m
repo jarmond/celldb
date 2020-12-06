@@ -5,7 +5,7 @@ conn = dbOpen();
 
 sql = 'SELECT id,name FROM microscope;';
 results = fetch(conn.conn, sql);
-
+results = table2cell(results);
 if isempty(results)
   error('No microscopes');
 else

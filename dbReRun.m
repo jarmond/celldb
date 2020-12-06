@@ -7,7 +7,7 @@ function dbReRun(runId,maxIters)
 % Check existing max and convRc.
 conn = dbOpen();
 sql = sprintf('SELECT maxruns,conv_Rc FROM run WHERE id=%d;',runId);
-results = fetch(conn.conn, sql);
+results = table2cell(fetch(conn.conn, sql));
 if isempty(results)
   error('No run with id %d found',runId);
 end
@@ -33,4 +33,3 @@ sql = sprintf(['UPDATE task SET status=''P'',pbsid=NULL WHERE run_id=%d AND type
 dbCheck(exec(conn.conn, sql));
 
 fprintf('Unconverged tasks for run %d are now pending\n',runId);
-
