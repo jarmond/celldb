@@ -5,4 +5,4 @@ conn = dbOpen();
 sql = sprintf('SELECT 1 FROM %s WHERE id = %d',table,id);
 results = fetch(conn.conn,sql);
 results = table2cell(results);
-tf = ~isempty(results{1,1});
+tf = ~isempty(results);
